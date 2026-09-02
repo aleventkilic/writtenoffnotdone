@@ -1,0 +1,1001 @@
+<title>Second-Act Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Libre+Franklin:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#20242B;
+  --paper:#F3F1EB;
+  --surface:#FFFFFF;
+  --surface-2:#EAE7DE;
+  --brass:#A8722E;
+  --brass-strong:#8A5C22;
+  --brass-tint:#EFDFC1;
+  --forest:#3F6B4E;
+  --forest-tint:#DCE9DF;
+  --rust:#A6462D;
+  --rust-tint:#F2DED7;
+  --blue:#4C6E8A;
+  --blue-tint:#DEE6EC;
+  --teal:#3F7A72;
+  --teal-tint:#D9E9E6;
+  --olive:#7C7857;
+  --olive-tint:#E7E4D3;
+  --slate:#6E6A60;
+  --slate-soft:#8E897C;
+  --line:#DFDACD;
+  --line-strong:#C9C3B3;
+  --shadow:0 1px 2px rgba(32,36,43,.06), 0 6px 20px rgba(32,36,43,.05);
+  --shadow-lg:0 10px 34px rgba(32,36,43,.16);
+  --focus:#4C6E8A;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ink:#ECE8DE;
+    --paper:#1B1E24;
+    --surface:#242832;
+    --surface-2:#2C313C;
+    --brass:#D9A15C;
+    --brass-strong:#EAB876;
+    --brass-tint:#3B321F;
+    --forest:#7FB894;
+    --forest-tint:#243329;
+    --rust:#E08A70;
+    --rust-tint:#3A2620;
+    --blue:#8CB0D0;
+    --blue-tint:#212C36;
+    --teal:#7FC0B6;
+    --teal-tint:#1D302D;
+    --olive:#BDB68A;
+    --olive-tint:#2B2A1E;
+    --slate:#A6A296;
+    --slate-soft:#847F72;
+    --line:#3A3F49;
+    --line-strong:#4A505C;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+    --shadow-lg:0 14px 40px rgba(0,0,0,.5);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#ECE8DE;
+  --paper:#1B1E24;
+  --surface:#242832;
+  --surface-2:#2C313C;
+  --brass:#D9A15C;
+  --brass-strong:#EAB876;
+  --brass-tint:#3B321F;
+  --forest:#7FB894;
+  --forest-tint:#243329;
+  --rust:#E08A70;
+  --rust-tint:#3A2620;
+  --blue:#8CB0D0;
+  --blue-tint:#212C36;
+  --teal:#7FC0B6;
+  --teal-tint:#1D302D;
+  --olive:#BDB68A;
+  --olive-tint:#2B2A1E;
+  --slate:#A6A296;
+  --slate-soft:#847F72;
+  --line:#3A3F49;
+  --line-strong:#4A505C;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  --shadow-lg:0 14px 40px rgba(0,0,0,.5);
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Libre Franklin',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:14.5px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:'Fraunces',Georgia,'Times New Roman',serif;text-wrap:balance;margin:0}
+.mono{font-family:'IBM Plex Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;font-variant-numeric:tabular-nums;}
+a{color:var(--blue)}
+button{font-family:inherit}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:4px}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001ms !important;transition-duration:.001ms !important}}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px 64px}
+
+/* ── Masthead ── */
+.masthead{
+  border-bottom:1px solid var(--line);
+  padding:22px 0 18px;
+}
+.masthead-row{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.brand-eyebrow{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--slate);margin-bottom:4px}
+.brand-title{font-size:26px;font-weight:600;color:var(--ink)}
+.brand-title em{font-style:normal;color:var(--brass)}
+.masthead-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+.btn{
+  border:1px solid var(--line-strong);
+  background:var(--surface);
+  color:var(--ink);
+  border-radius:7px;
+  padding:8px 14px;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  transition:background .12s, border-color .12s, transform .05s;
+  white-space:nowrap;
+}
+.btn:hover{border-color:var(--slate-soft)}
+.btn:active{transform:translateY(1px)}
+.btn-brass{background:var(--brass);border-color:var(--brass);color:#fff}
+.btn-brass:hover{background:var(--brass-strong);border-color:var(--brass-strong)}
+.btn-quiet{background:transparent;border-color:transparent;color:var(--slate)}
+.btn-quiet:hover{background:var(--surface-2);color:var(--ink)}
+.btn-sm{padding:5px 10px;font-size:12px;border-radius:6px}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+
+/* ── Save reminder banner ── */
+.save-banner{
+  display:none;
+  align-items:center;
+  gap:14px;
+  background:var(--brass-tint);
+  border:1px solid var(--line);
+  border-radius:9px;
+  padding:10px 14px;
+  margin-top:16px;
+  font-size:12.5px;
+  color:var(--ink);
+  line-height:1.5;
+}
+.save-banner.show{display:flex}
+@media (max-width:640px){
+  .save-banner{flex-direction:column;align-items:flex-start;}
+}
+
+/* ── Metrics strip ── */
+.metrics{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+  border-radius:10px;
+  overflow:hidden;
+  margin:20px 0 6px;
+}
+.metric{background:var(--surface);padding:13px 14px}
+.metric-num{font-size:22px;font-weight:600;line-height:1}
+.metric-label{font-size:11px;color:var(--slate);margin-top:5px;line-height:1.3}
+.metrics-foot{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--slate);margin-bottom:22px;flex-wrap:wrap;gap:6px}
+.metrics-foot button{background:none;border:none;color:var(--blue);cursor:pointer;font-size:12px;font-weight:600;padding:0}
+
+/* ── Toolbar ── */
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.toolbar-left{display:flex;gap:8px;flex-wrap:wrap}
+
+/* ── Board ── */
+.board{
+  display:grid;
+  grid-auto-flow:column;
+  grid-auto-columns:266px;
+  gap:14px;
+  overflow-x:auto;
+  padding-bottom:14px;
+  scroll-snap-type:x proximity;
+}
+.column{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:12px;
+  display:flex;
+  flex-direction:column;
+  min-height:120px;
+  scroll-snap-align:start;
+}
+.column-head{
+  padding:12px 13px 10px;
+  border-bottom:2px solid var(--stage-color, var(--line));
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+.column-title{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600}
+.stage-dot{width:8px;height:8px;border-radius:50%;background:var(--stage-color);flex-shrink:0}
+.column-count{font-size:11px;color:var(--slate);background:var(--surface-2);border-radius:20px;padding:1px 8px}
+.column-body{padding:9px;display:flex;flex-direction:column;gap:8px;flex:1;min-height:60px}
+.column-empty{font-size:11.5px;color:var(--slate-soft);padding:16px 6px;text-align:center;line-height:1.5}
+
+.card{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:9px;
+  padding:10px 11px;
+  cursor:pointer;
+  box-shadow:var(--shadow);
+  transition:border-color .12s, box-shadow .12s;
+}
+.card:hover{border-color:var(--slate-soft)}
+.card-title{font-size:13px;font-weight:600;line-height:1.3;margin-bottom:2px}
+.card-company{font-size:12px;color:var(--slate);margin-bottom:6px}
+.card-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.card-tag{font-size:10.5px;padding:2px 7px;border-radius:20px;font-weight:600;background:var(--surface-2);color:var(--slate)}
+.card-round{font-size:10.5px;padding:2px 7px;border-radius:20px;font-weight:600;background:var(--teal-tint);color:var(--teal)}
+.card-days{font-size:10.5px;color:var(--slate-soft);margin-left:auto}
+.card-actions{display:flex;gap:5px;margin-top:8px}
+.card-actions button{flex:1}
+
+/* ── Modal ── */
+.overlay{position:fixed;inset:0;background:rgba(20,22,26,.5);display:none;align-items:flex-start;justify-content:center;padding:5vh 16px;z-index:100;overflow-y:auto}
+.overlay.open{display:flex}
+.modal{background:var(--surface);border:1px solid var(--line);border-radius:14px;width:100%;max-width:520px;box-shadow:var(--shadow-lg);margin-bottom:5vh}
+.modal-wide{max-width:640px}
+.modal-head{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.modal-head h2{font-size:17px}
+.modal-sub{font-size:12px;color:var(--slate);margin-top:3px}
+.modal-close{background:none;border:none;font-size:20px;color:var(--slate);cursor:pointer;line-height:1;padding:2px}
+.modal-close:hover{color:var(--ink)}
+.modal-body{padding:18px 20px}
+.modal-foot{padding:14px 20px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:8px}
+
+.field{margin-bottom:13px}
+.field label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--slate);margin-bottom:5px}
+.field input,.field select,.field textarea{
+  width:100%;background:var(--paper);border:1px solid var(--line-strong);border-radius:7px;
+  padding:8px 10px;font-size:13.5px;color:var(--ink);font-family:inherit;outline:none;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--focus)}
+.field textarea{min-height:64px;resize:vertical}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field-hint{font-size:11px;color:var(--slate-soft);margin-top:4px}
+
+/* ── Detail sections ── */
+.detail-row{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:20px}
+.history{list-style:none;margin:0;padding:0;border-left:2px solid var(--line);margin-left:4px}
+.history li{position:relative;padding:0 0 12px 16px;font-size:12.5px}
+.history li::before{content:'';position:absolute;left:-5px;top:4px;width:8px;height:8px;border-radius:50%;background:var(--stage-color, var(--brass))}
+.history li b{color:var(--ink)}
+.history li span{color:var(--slate);display:block;font-size:11px;margin-top:1px}
+
+/* ── Quick search ── */
+.qs-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.qs-links{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.qs-link{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:9px 12px;
+  font-size:12.5px;font-weight:600;color:var(--ink);text-decoration:none;
+}
+.qs-link:hover{border-color:var(--slate-soft)}
+.qs-link small{display:block;font-weight:400;color:var(--slate);font-size:11px;margin-top:1px}
+
+/* ── Backup ── */
+.backup-ta{width:100%;min-height:120px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;background:var(--paper);border:1px solid var(--line-strong);border-radius:7px;padding:10px;color:var(--ink);resize:vertical}
+
+.empty-state{text-align:center;padding:60px 20px;color:var(--slate)}
+.empty-state h3{font-size:18px;color:var(--ink);margin-bottom:8px}
+.empty-state p{max-width:420px;margin:0 auto;font-size:13px;line-height:1.6}
+
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:9px 16px;border-radius:8px;font-size:12.5px;font-weight:600;box-shadow:var(--shadow-lg);z-index:300;opacity:0;pointer-events:none;transition:opacity .2s, transform .2s}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(-4px)}
+
+.footnote{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--slate-soft);line-height:1.6}
+
+@media (max-width:640px){
+  .metrics{grid-template-columns:repeat(2,1fr)}
+  .qs-grid{grid-template-columns:1fr}
+  .field-row{grid-template-columns:1fr}
+  .brand-title{font-size:21px}
+}
+
+@media print{
+  .masthead-actions,.toolbar,.qs-toggle,.card-actions,.overlay,.footnote button{display:none !important}
+  body{background:#fff;color:#111}
+  .board{display:block;overflow:visible}
+  .column{break-inside:avoid;margin-bottom:14px;box-shadow:none}
+}
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="masthead-row">
+      <div>
+        <div class="brand-eyebrow">Written Off, Not Done — companion tool</div>
+        <h1 class="brand-title">Second-Act <em>Tracker</em></h1>
+      </div>
+      <div class="masthead-actions">
+        <button class="btn" onclick="openQuickSearch()">Find roles</button>
+        <button class="btn" onclick="openBackup()">Backup</button>
+        <button class="btn btn-brass" onclick="openJobModal()">+ Add a role</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="save-banner" id="save-banner">
+    <span>Before you close this tab: copy your backup. This board lives in this one browser, if it clears your saved data, or you open the tracker on a different phone or computer, your roles won't be there.</span>
+    <button class="btn btn-sm" style="flex-shrink:0;" onclick="openBackup()">Back up now →</button>
+  </div>
+
+  <section class="metrics" id="metrics"></section>
+  <div class="metrics-foot">
+    <span id="metrics-week-label"></span>
+    <button onclick="openOutreachLog()">Log warm outreach →</button>
+  </div>
+
+  <div class="toolbar">
+    <div class="toolbar-left">
+      <strong id="board-count" class="mono" style="font-size:13px;"></strong>
+      <span style="color:var(--slate);font-size:13px;">roles in motion</span>
+    </div>
+    <span style="font-size:12px;color:var(--slate-soft);">Drag isn't needed here — open a card and move it a stage at a time.</span>
+  </div>
+
+  <div class="board" id="board"></div>
+
+  <p class="footnote">
+    Your data stays on this device, in this browser, nowhere else. Nothing is sent anywhere. That also means it's only as safe as this one browser: close this tab and it should still be here next time, but if you clear your browsing data, switch browsers, or open the link on a different phone or computer, it won't come with you. Get in the habit of using <button class="btn-quiet btn-sm" style="display:inline-flex;padding:2px 8px;" onclick="openBackup()">Backup</button> after you update your board, copy the text and paste it into a note or an email to yourself. Next time, paste it back in under Backup to pick up right where you left off. This tracker mirrors the five numbers from Chapter 15 and Appendix F of the book: warm outreach sent, interviews scheduled, interviews per ten applications, second-round rate, and offers per interview. Review it every Sunday, like the book says.
+  </p>
+
+</div>
+
+<!-- ── Add / edit role modal ── -->
+<div class="overlay" id="job-overlay" onclick="overlayClick(event,'job-overlay')">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <h2 id="job-modal-title">Add a role</h2>
+        <div class="modal-sub">Just enough to track it. You can fill in more later.</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('job-overlay')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="field-row">
+        <div class="field">
+          <label for="f-title">Job title</label>
+          <input id="f-title" placeholder="e.g. Senior Operations Manager">
+        </div>
+        <div class="field">
+          <label for="f-company">Company</label>
+          <input id="f-company" placeholder="e.g. Ironclad Facilities">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="f-location">Location</label>
+          <input id="f-location" placeholder="e.g. Ashburn, VA or Remote">
+        </div>
+        <div class="field">
+          <label for="f-stage">Starting stage</label>
+          <select id="f-stage"></select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="f-url">Posting link (optional)</label>
+        <input id="f-url" placeholder="https://...">
+      </div>
+      <div class="field">
+        <label for="f-notes">Notes (optional)</label>
+        <textarea id="f-notes" placeholder="Contact name, referral, salary range, next step..."></textarea>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" onclick="closeModal('job-overlay')">Cancel</button>
+      <button class="btn btn-brass" onclick="saveJobForm()">Save role</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Detail modal ── -->
+<div class="overlay" id="detail-overlay" onclick="overlayClick(event,'detail-overlay')">
+  <div class="modal modal-wide">
+    <div class="modal-head">
+      <div>
+        <h2 id="detail-title">Role</h2>
+        <div class="modal-sub" id="detail-sub"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal('detail-overlay')">×</button>
+    </div>
+    <div class="modal-body" id="detail-body"></div>
+    <div class="modal-foot" id="detail-foot"></div>
+  </div>
+</div>
+
+<!-- ── Quick search modal ── -->
+<div class="overlay" id="qs-overlay" onclick="overlayClick(event,'qs-overlay')">
+  <div class="modal modal-wide">
+    <div class="modal-head">
+      <div>
+        <h2>Find roles</h2>
+        <div class="modal-sub">Builds search links on Indeed, LinkedIn and Glassdoor. Opens in a new tab, nothing is fetched here.</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('qs-overlay')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="qs-grid">
+        <div class="field" style="margin-bottom:0;">
+          <label for="qs-role">Target title</label>
+          <input id="qs-role" placeholder="e.g. Critical Facilities Manager" oninput="saveQsPrefs()">
+        </div>
+        <div class="field" style="margin-bottom:0;">
+          <label for="qs-loc">Location</label>
+          <input id="qs-loc" placeholder="e.g. Loudoun County, VA" oninput="saveQsPrefs()">
+        </div>
+      </div>
+      <div class="qs-links" id="qs-links"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Outreach log modal ── -->
+<div class="overlay" id="outreach-overlay" onclick="overlayClick(event,'outreach-overlay')">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <h2>Warm outreach</h2>
+        <div class="modal-sub">A message to a former colleague, a referral ask, a LinkedIn note. Log it here, not in the board.</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('outreach-overlay')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label for="oa-who">Who (optional)</label>
+        <input id="oa-who" placeholder="e.g. Maria at Equinix">
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-brass" style="flex:1;" onclick="logOutreach()">+ Log outreach sent today</button>
+      </div>
+      <div style="margin-top:16px;">
+        <div class="field-hint" style="margin-bottom:8px;">This week's log</div>
+        <ul class="history" id="outreach-history" style="max-height:200px;overflow-y:auto;"></ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Backup modal ── -->
+<div class="overlay" id="backup-overlay" onclick="overlayClick(event,'backup-overlay')">
+  <div class="modal modal-wide">
+    <div class="modal-head">
+      <div>
+        <h2>Backup &amp; restore</h2>
+        <div class="modal-sub">This browser is the only place your data lives. Copy it out before you close this tab, and again any time you've made changes you don't want to redo. Paste it back in under Restore next time you visit, on this browser or a new one.</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('backup-overlay')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="field">
+        <label>Save a backup file</label>
+        <button class="btn btn-brass" onclick="downloadBackup()">⭳ Download backup file</button>
+        <div class="field-hint">Works when you've saved the tracker as its own page and opened it directly. If you're viewing this through a preview or share link, it'll tell you to use Copy below instead, that's expected, not broken.</div>
+      </div>
+      <div class="field">
+        <label for="backup-file">Restore from a backup file</label>
+        <input type="file" id="backup-file" accept="application/json,.json">
+        <div class="field-hint">Pick the file you downloaded before. This replaces what's currently in the tracker.</div>
+      </div>
+      <div class="field" style="margin-top:18px;padding-top:14px;border-top:1px solid var(--line);">
+        <label>Or copy and paste (works everywhere)</label>
+        <textarea class="backup-ta" id="backup-out" readonly onclick="this.select()"></textarea>
+        <div class="field-hint">Tap <b>Select all</b>, then <b>Copy</b>, then paste it somewhere safe: a note, an email to yourself, a document. That's your backup.</div>
+        <div class="field-hint"><button class="btn btn-sm" style="margin-top:6px;" onclick="selectBackup()">Select all</button> <button class="btn btn-sm" style="margin-top:6px;" onclick="copyBackup()">Copy</button></div>
+      </div>
+      <div class="field">
+        <label for="backup-in">Restore from pasted text</label>
+        <textarea class="backup-ta" id="backup-in" placeholder="Paste a backup you copied earlier, then click Restore below."></textarea>
+      </div>
+      <div class="field" style="margin-top:18px;padding-top:14px;border-top:1px solid var(--line);">
+        <label style="color:var(--rust);">Start over</label>
+        <button class="btn btn-sm" style="color:var(--rust);border-color:var(--rust);" onclick="clearAllData()">Clear everything on this board</button>
+        <div class="field-hint">Wipes every role and the outreach log on this device. Only does this, nothing else, and can't be undone &mdash; back up first if you want to keep anything.</div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn" onclick="closeModal('backup-overlay')">Close</button>
+      <button class="btn btn-brass" onclick="restoreBackup()">Restore from pasted text</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+'use strict';
+
+// ═══════════════════════════════════════════════════════
+// STAGES
+// ═══════════════════════════════════════════════════════
+const STAGES = [
+  {id:'researching', label:'Researching', color:'var(--olive)', tint:'var(--olive-tint)', hint:"Roles worth a look, before you've applied."},
+  {id:'applied',      label:'Applied',      color:'var(--brass)', tint:'var(--brass-tint)', hint:'Sent, and waiting to hear back.'},
+  {id:'phone',        label:'Phone screen', color:'var(--blue)',  tint:'var(--blue-tint)',  hint:'A first conversation, scheduled or done.'},
+  {id:'interview',    label:'Interview',    color:'var(--teal)',  tint:'var(--teal-tint)',  hint:'Past the phone screen. Use the round counter for a second or third pass.'},
+  {id:'offer',        label:'Offer',        color:'var(--forest)',tint:'var(--forest-tint)',hint:'An offer is on the table.'},
+  {id:'rejected',     label:'Rejected',     color:'var(--rust)',  tint:'var(--rust-tint)',  hint:"Closed out. Not a verdict on you, just this one."},
+];
+const STAGE_MAP = Object.fromEntries(STAGES.map(s=>[s.id,s]));
+const FORWARD_ORDER = ['researching','applied','phone','interview','offer'];
+
+// ═══════════════════════════════════════════════════════
+// STATE + PERSISTENCE
+// ═══════════════════════════════════════════════════════
+const STORAGE_KEY = 'secondActTracker.v1';
+let state = { jobs: [], outreach: [], qs: {role:'', loc:''} };
+let editingJobId = null;
+let detailJobId = null;
+let storageOK = true;
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      const parsed = JSON.parse(raw);
+      state.jobs = Array.isArray(parsed.jobs) ? parsed.jobs : [];
+      state.outreach = Array.isArray(parsed.outreach) ? parsed.outreach : [];
+      state.qs = parsed.qs || {role:'',loc:''};
+    }
+  }catch(e){ storageOK = false; }
+}
+function saveState(){
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }catch(e){
+    storageOK = false;
+    showToast("Couldn't save. Private browsing or a full disk can block this.");
+  }
+}
+
+function uid(){ return 'r' + Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function fmtDate(iso){
+  const d = new Date(iso);
+  return d.toLocaleDateString(undefined,{month:'short',day:'numeric'});
+}
+function daysAgo(iso){
+  const ms = Date.now() - new Date(iso).getTime();
+  return Math.max(0, Math.floor(ms/86400000));
+}
+
+// week window: Sunday 00:00 -> now, local time
+function weekStart(){
+  const d = new Date();
+  d.setHours(0,0,0,0);
+  d.setDate(d.getDate() - d.getDay());
+  return d;
+}
+function inThisWeek(iso){
+  return new Date(iso).getTime() >= weekStart().getTime();
+}
+
+// ═══════════════════════════════════════════════════════
+// METRICS  (mirrors the book's Chapter 15 / Appendix F tracker)
+// ═══════════════════════════════════════════════════════
+function computeMetrics(){
+  const ws = weekStart();
+  let applications = 0, phoneEvents = 0, interviewEvents = 0, offerEvents = 0, outreach = 0;
+
+  state.jobs.forEach(j=>{
+    (j.history||[]).forEach(h=>{
+      if(!inThisWeek(h.date)) return;
+      if(h.stage === 'applied') applications++;
+      if(h.stage === 'phone') phoneEvents++;
+      if(h.stage === 'interview') interviewEvents++;
+      if(h.stage === 'offer') offerEvents++;
+    });
+  });
+  outreach = state.outreach.filter(o => inThisWeek(o.date)).length;
+
+  const interviewsScheduled = phoneEvents + interviewEvents;
+  const interviewsPerTen = applications > 0 ? (interviewsScheduled / applications) * 10 : null;
+  const secondRoundRate = phoneEvents > 0 ? (interviewEvents / phoneEvents) * 100 : null;
+  const offersPerInterview = interviewsScheduled > 0 ? (offerEvents / interviewsScheduled) * 100 : null;
+
+  return { outreach, interviewsScheduled, interviewsPerTen, secondRoundRate, offersPerInterview };
+}
+
+function fmt1(n){ return n===null ? '—' : (Math.round(n*10)/10).toString(); }
+function fmtPct(n){ return n===null ? '—' : Math.round(n) + '%'; }
+
+function renderMetrics(){
+  const m = computeMetrics();
+  const tiles = [
+    {num:m.outreach, label:'Warm outreach sent'},
+    {num:m.interviewsScheduled, label:'Interviews scheduled'},
+    {num:fmt1(m.interviewsPerTen), label:'Interviews per 10 applications'},
+    {num:fmtPct(m.secondRoundRate), label:'Second-round rate'},
+    {num:fmtPct(m.offersPerInterview), label:'Offers per interview'},
+  ];
+  document.getElementById('metrics').innerHTML = tiles.map(t=>`
+    <div class="metric">
+      <div class="metric-num mono">${t.num}</div>
+      <div class="metric-label">${t.label}</div>
+    </div>`).join('');
+  const ws = weekStart();
+  document.getElementById('metrics-week-label').textContent =
+    `Week of ${ws.toLocaleDateString(undefined,{month:'short',day:'numeric'})} · resets Sunday`;
+}
+
+// ═══════════════════════════════════════════════════════
+// BOARD RENDER
+// ═══════════════════════════════════════════════════════
+function renderBoard(){
+  const board = document.getElementById('board');
+  document.getElementById('board-count').textContent = state.jobs.filter(j=>j.stage!=='rejected').length;
+
+  if(state.jobs.length === 0){
+    board.innerHTML = `<div class="empty-state" style="grid-column:1/-1;width:100%;">
+      <h3>Nothing tracked yet</h3>
+      <p>Add the first role you're chasing. Each card moves through the stages as things move &mdash; researching, applied, phone screen, interview, offer, or rejected.</p>
+      <div style="margin-top:16px;"><button class="btn btn-brass" onclick="openJobModal()">+ Add a role</button></div>
+    </div>`;
+    return;
+  }
+
+  board.innerHTML = STAGES.map(stage=>{
+    const jobs = state.jobs.filter(j=>j.stage===stage.id).sort((a,b)=> (b.updatedAt||'').localeCompare(a.updatedAt||''));
+    const cards = jobs.length
+      ? jobs.map(j=>renderCard(j)).join('')
+      : `<div class="column-empty">${esc(stage.hint)}</div>`;
+    return `
+    <div class="column" style="--stage-color:${stage.color}">
+      <div class="column-head">
+        <div class="column-title"><span class="stage-dot"></span>${stage.label}</div>
+        <span class="column-count mono">${jobs.length}</span>
+      </div>
+      <div class="column-body">${cards}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderCard(j){
+  const stage = STAGE_MAP[j.stage];
+  const roundBadge = (j.stage==='interview' && j.round>1) ? `<span class="card-round">Round ${j.round}</span>` : '';
+  return `
+  <div class="card" onclick="openDetail('${j.id}')">
+    <div class="card-title">${esc(j.title||'Untitled role')}</div>
+    <div class="card-company">${esc(j.company||'Company TBD')}${j.location?' · '+esc(j.location):''}</div>
+    <div class="card-meta">
+      ${roundBadge}
+      <span class="card-days">${daysAgo(j.updatedAt)===0 ? 'today' : daysAgo(j.updatedAt)+'d in stage'}</span>
+    </div>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════════════
+// ADD / EDIT JOB
+// ═══════════════════════════════════════════════════════
+function populateStageSelect(){
+  const sel = document.getElementById('f-stage');
+  sel.innerHTML = STAGES.filter(s=>s.id!=='rejected').map(s=>`<option value="${s.id}">${s.label}</option>`).join('');
+}
+
+function openJobModal(job){
+  editingJobId = job ? job.id : null;
+  document.getElementById('job-modal-title').textContent = job ? 'Edit role' : 'Add a role';
+  populateStageSelect();
+  document.getElementById('f-title').value = job ? job.title : '';
+  document.getElementById('f-company').value = job ? job.company : '';
+  document.getElementById('f-location').value = job ? job.location : '';
+  document.getElementById('f-url').value = job ? job.url : '';
+  document.getElementById('f-notes').value = job ? job.notes : '';
+  document.getElementById('f-stage').value = job ? job.stage : 'applied';
+  document.getElementById('f-stage').disabled = !!job;
+  document.getElementById('job-overlay').classList.add('open');
+  setTimeout(()=>document.getElementById('f-title').focus(), 80);
+}
+
+function saveJobForm(){
+  const title = document.getElementById('f-title').value.trim();
+  const company = document.getElementById('f-company').value.trim();
+  if(!title){ showToast('Give it a job title first.'); return; }
+
+  const now = new Date().toISOString();
+
+  if(editingJobId){
+    const j = state.jobs.find(x=>x.id===editingJobId);
+    if(j){
+      j.title = title; j.company = company;
+      j.location = document.getElementById('f-location').value.trim();
+      j.url = document.getElementById('f-url').value.trim();
+      j.notes = document.getElementById('f-notes').value.trim();
+    }
+  } else {
+    const stage = document.getElementById('f-stage').value;
+    state.jobs.unshift({
+      id: uid(),
+      title, company,
+      location: document.getElementById('f-location').value.trim(),
+      url: document.getElementById('f-url').value.trim(),
+      notes: document.getElementById('f-notes').value.trim(),
+      stage, round: 1,
+      createdAt: now, updatedAt: now,
+      history: [{stage, date: now}],
+    });
+  }
+  saveState();
+  renderAll();
+  closeModal('job-overlay');
+  showToast(editingJobId ? 'Role updated.' : 'Role added.');
+}
+
+// ═══════════════════════════════════════════════════════
+// DETAIL / STAGE MOVEMENT
+// ═══════════════════════════════════════════════════════
+function openDetail(id){
+  const j = state.jobs.find(x=>x.id===id);
+  if(!j) return;
+  detailJobId = id;
+  const stage = STAGE_MAP[j.stage];
+
+  document.getElementById('detail-title').textContent = j.title || 'Untitled role';
+  document.getElementById('detail-sub').textContent = [j.company, j.location].filter(Boolean).join(' · ');
+
+  const nextIdx = FORWARD_ORDER.indexOf(j.stage);
+  const nextStage = nextIdx>=0 && nextIdx<FORWARD_ORDER.length-1 ? STAGE_MAP[FORWARD_ORDER[nextIdx+1]] : null;
+
+  document.getElementById('detail-body').innerHTML = `
+    <div class="detail-row">
+      <span class="pill" style="background:${stage.tint};color:${stage.color};">${stage.label}${j.stage==='interview'&&j.round>1?' · round '+j.round:''}</span>
+      ${j.url ? `<a class="btn btn-sm" href="${esc(j.url)}" target="_blank" rel="noopener">Open posting ↗</a>` : ''}
+    </div>
+    ${j.notes ? `<div class="field"><label>Notes</label><div style="font-size:13px;line-height:1.6;">${esc(j.notes).replace(/\n/g,'<br>')}</div></div>` : ''}
+    <div class="field">
+      <label>History</label>
+      <ul class="history">
+        ${(j.history||[]).slice().reverse().map(h=>`<li style="--stage-color:${STAGE_MAP[h.stage].color}"><b>${STAGE_MAP[h.stage].label}</b><span>${fmtDate(h.date)}</span></li>`).join('')}
+      </ul>
+    </div>
+  `;
+
+  const actions = [];
+  if(j.stage === 'interview'){
+    actions.push(`<button class="btn btn-sm" onclick="bumpRound('${j.id}')">+ Log another round</button>`);
+  }
+  if(nextStage){
+    actions.push(`<button class="btn btn-sm btn-brass" onclick="moveStage('${j.id}','${nextStage.id}')">Move to ${nextStage.label} →</button>`);
+  }
+  if(j.stage !== 'rejected'){
+    actions.push(`<button class="btn btn-sm" onclick="moveStage('${j.id}','rejected')">Mark rejected</button>`);
+  }
+  actions.push(`<button class="btn btn-sm" onclick="openJobModal(state.jobs.find(x=>x.id==='${j.id}'))">Edit</button>`);
+  actions.push(`<button class="btn btn-sm" onclick="deleteJob('${j.id}')">Delete</button>`);
+  document.getElementById('detail-foot').innerHTML = actions.join('');
+
+  document.getElementById('detail-overlay').classList.add('open');
+}
+
+function moveStage(id, newStage){
+  const j = state.jobs.find(x=>x.id===id);
+  if(!j) return;
+  j.stage = newStage;
+  j.updatedAt = new Date().toISOString();
+  if(newStage === 'interview') j.round = 1;
+  j.history.push({stage:newStage, date:j.updatedAt});
+  saveState();
+  renderAll();
+  openDetail(id);
+  showToast(`Moved to ${STAGE_MAP[newStage].label}.`);
+}
+
+function bumpRound(id){
+  const j = state.jobs.find(x=>x.id===id);
+  if(!j) return;
+  j.round = (j.round||1) + 1;
+  j.updatedAt = new Date().toISOString();
+  j.history.push({stage:'interview', date:j.updatedAt});
+  saveState();
+  renderAll();
+  openDetail(id);
+  showToast(`Round ${j.round} logged.`);
+}
+
+function deleteJob(id){
+  if(!confirm('Remove this role? This cannot be undone.')) return;
+  state.jobs = state.jobs.filter(x=>x.id!==id);
+  saveState();
+  renderAll();
+  closeModal('detail-overlay');
+  showToast('Role removed.');
+}
+
+// ═══════════════════════════════════════════════════════
+// OUTREACH LOG
+// ═══════════════════════════════════════════════════════
+function openOutreachLog(){
+  renderOutreachHistory();
+  document.getElementById('oa-who').value = '';
+  document.getElementById('outreach-overlay').classList.add('open');
+}
+function logOutreach(){
+  const who = document.getElementById('oa-who').value.trim();
+  state.outreach.unshift({date:new Date().toISOString(), who});
+  saveState();
+  renderAll();
+  renderOutreachHistory();
+  document.getElementById('oa-who').value = '';
+  showToast('Outreach logged.');
+}
+function renderOutreachHistory(){
+  const recent = state.outreach.filter(o=>inThisWeek(o.date));
+  document.getElementById('outreach-history').innerHTML = recent.length
+    ? recent.map(o=>`<li style="--stage-color:var(--brass)"><b>${o.who ? esc(o.who) : 'Outreach sent'}</b><span>${fmtDate(o.date)}</span></li>`).join('')
+    : '<li style="color:var(--slate-soft);list-style:none;">Nothing logged this week yet.</li>';
+}
+
+// ═══════════════════════════════════════════════════════
+// QUICK SEARCH
+// ═══════════════════════════════════════════════════════
+function openQuickSearch(){
+  document.getElementById('qs-role').value = state.qs.role || '';
+  document.getElementById('qs-loc').value = state.qs.loc || '';
+  renderQsLinks();
+  document.getElementById('qs-overlay').classList.add('open');
+}
+function saveQsPrefs(){
+  state.qs.role = document.getElementById('qs-role').value;
+  state.qs.loc = document.getElementById('qs-loc').value;
+  saveState();
+  renderQsLinks();
+}
+function renderQsLinks(){
+  const role = (state.qs.role||'').trim() || 'operations manager';
+  const loc = (state.qs.loc||'').trim();
+  const q = encodeURIComponent(role);
+  const l = encodeURIComponent(loc);
+
+  const links = [
+    {name:'Indeed', sub:'sorted by newest', href:`https://www.indeed.com/jobs?q=${q}&l=${l}&sort=date`},
+    {name:'LinkedIn', sub:'last 7 days', href:`https://www.linkedin.com/jobs/search/?keywords=${q}&location=${l}&f_TPR=r604800`},
+    {name:'Glassdoor', sub:'company reviews included', href:`https://www.glassdoor.com/Job/jobs.htm?sc.keyword=${q}&locT=C&locKeyword=${l}`},
+    {name:'Google', sub:'broad web search', href:`https://www.google.com/search?q=${q}+jobs+${l}`},
+  ];
+  document.getElementById('qs-links').innerHTML = links.map(x=>`
+    <a class="qs-link" href="${x.href}" target="_blank" rel="noopener">
+      <span>${x.name}<small>${x.sub}</small></span>
+      <span>↗</span>
+    </a>`).join('');
+}
+
+// ═══════════════════════════════════════════════════════
+// BACKUP / RESTORE
+// ═══════════════════════════════════════════════════════
+// window.claude only exists at all when this page is framed inside a claude.ai
+// viewer (shared link or preview). Outside one entirely (saved as its own page
+// and opened directly) a plain browser download always works. Inside one, it
+// only works if the "downloads" capability was granted for this view — and this
+// page intentionally doesn't declare it, because claude.ai won't let a page that
+// requests file-save permission be shared publicly, which matters more here than
+// the download button. So: inside a viewer, be honest that the button can't do
+// anything, and point straight at the copy-paste method instead of guessing.
+const insideClaudeViewer = !!(window.claude && window.claude.use);
+
+function openBackup(){
+  document.getElementById('backup-out').value = JSON.stringify(state, null, 2);
+  document.getElementById('backup-in').value = '';
+  document.getElementById('backup-file').value = '';
+  document.getElementById('backup-overlay').classList.add('open');
+}
+
+async function downloadBackup(){
+  if(insideClaudeViewer){
+    showToast("Downloading isn't available here. Use the copy option above instead.");
+    return;
+  }
+  const data = JSON.stringify(state, null, 2);
+  const stamp = new Date().toISOString().slice(0,10);
+  const filename = `second-act-tracker-backup-${stamp}.json`;
+  try{
+    const blob = new Blob([data], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(url), 4000);
+    showToast('Backup saved to your downloads folder.');
+  }catch(e){
+    showToast("That didn't work here. Use the copy option above instead.");
+  }
+}
+function selectBackup(){ document.getElementById('backup-out').select(); }
+function copyBackup(){
+  const ta = document.getElementById('backup-out');
+  ta.select();
+  try{
+    navigator.clipboard.writeText(ta.value).then(()=>showToast('Copied.')).catch(()=>showToast('Select all, then copy manually.'));
+  }catch(e){ showToast('Select all, then copy manually.'); }
+}
+function restoreBackup(){
+  const raw = document.getElementById('backup-in').value.trim();
+  if(!raw){ showToast('Paste a backup first.'); return; }
+  applyRestoredState(raw);
+}
+document.addEventListener('DOMContentLoaded', ()=>{
+  const fileInput = document.getElementById('backup-file');
+  if(fileInput){
+    fileInput.addEventListener('change', e=>{
+      const file = e.target.files[0];
+      if(!file) return;
+      const reader = new FileReader();
+      reader.onload = evt => applyRestoredState(evt.target.result);
+      reader.readAsText(file);
+    });
+  }
+});
+function applyRestoredState(raw){
+  try{
+    const parsed = JSON.parse(raw);
+    if(!parsed || !Array.isArray(parsed.jobs)) throw new Error('bad shape');
+    state = { jobs: parsed.jobs, outreach: Array.isArray(parsed.outreach)?parsed.outreach:[], qs: parsed.qs||{role:'',loc:''} };
+    saveState();
+    renderAll();
+    closeModal('backup-overlay');
+    showToast('Restored.');
+  }catch(e){
+    showToast("That didn't look like a valid backup file.");
+  }
+}
+
+function clearAllData(){
+  if(state.jobs.length === 0 && state.outreach.length === 0){
+    showToast('Already empty.');
+    return;
+  }
+  if(!confirm('Clear every role and the outreach log on this device? This cannot be undone.')) return;
+  state = { jobs: [], outreach: [], qs: state.qs };
+  saveState();
+  renderAll();
+  closeModal('backup-overlay');
+  showToast('Cleared. This board is empty.');
+}
+
+// ═══════════════════════════════════════════════════════
+// MODALS / TOAST
+// ═══════════════════════════════════════════════════════
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+function overlayClick(e,id){ if(e.target.id===id) closeModal(id); }
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape'){ ['job-overlay','detail-overlay','qs-overlay','outreach-overlay','backup-overlay'].forEach(closeModal); }
+});
+let toastTimer;
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 2600);
+}
+
+// ═══════════════════════════════════════════════════════
+// SAVE REMINDER
+// ═══════════════════════════════════════════════════════
+function renderSaveBanner(){
+  document.getElementById('save-banner').classList.toggle('show', state.jobs.length > 0);
+}
+
+// A plain browser prompt when they try to leave with roles tracked. Browsers
+// show their own generic wording, not this returnValue string, but setting it
+// is what triggers the prompt at all.
+window.addEventListener('beforeunload', function(e){
+  if(state.jobs && state.jobs.length > 0){
+    e.preventDefault();
+    e.returnValue = '';
+  }
+});
+
+// ═══════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════
+function renderAll(){ renderMetrics(); renderBoard(); renderSaveBanner(); }
+loadState();
+renderAll();
+if(!storageOK){ showToast('Your browser is blocking saved data (private mode?). Changes may not stick around.'); }
+</script>
