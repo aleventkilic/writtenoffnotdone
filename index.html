@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Written Off, Not Done &mdash; Downloads</title>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #faf8f5;
+    --ink: #1a1a1a;
+    --muted: #5a5a5a;
+    --line: #ddd6cb;
+    --card: #ffffff;
+    --accent: #8a3b2b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.5;
+  }
+  .wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+  header {
+    margin-bottom: 40px;
+  }
+  .eyebrow {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 8px 0;
+  }
+  h1 {
+    font-size: 30px;
+    margin: 0 0 12px 0;
+    line-height: 1.25;
+  }
+  header p {
+    color: var(--muted);
+    font-size: 16px;
+    max-width: 60ch;
+    margin: 0;
+  }
+  .resource {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 22px 24px;
+    margin-bottom: 18px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  .resource .info {
+    flex: 1 1 auto;
+  }
+  .resource h2 {
+    font-size: 18px;
+    margin: 0 0 6px 0;
+  }
+  .resource p {
+    margin: 0 0 12px 0;
+    color: var(--muted);
+    font-size: 14.5px;
+  }
+  .resource a.download {
+    display: inline-block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background: var(--accent);
+    text-decoration: none;
+    padding: 9px 16px;
+    border-radius: 6px;
+  }
+  .resource img.qr {
+    width: 96px;
+    height: 96px;
+    flex: 0 0 auto;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 6px;
+    background: #fff;
+  }
+  footer {
+    margin-top: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12.5px;
+    color: var(--muted);
+    text-align: center;
+  }
+  @media (max-width: 520px) {
+    .resource { flex-direction: column; align-items: flex-start; }
+    .resource img.qr { align-self: center; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Written Off, Not Done</p>
+    <h1>Book downloads</h1>
+    <p>The worksheets and tools from the book, free to download. Tap or scan whichever one you need.</p>
+  </header>
+
+  <div class="resource">
+    <div class="info">
+      <h2>Mock-interview scorecard</h2>
+      <p>Toolkit J &mdash; score a practice interview on 7 criteria.</p>
+      <a class="download" href="files/mock-interview-scorecard.pdf">Download PDF</a>
+    </div>
+    <img class="qr" src="qr/scorecard.png" alt="QR code for the mock-interview scorecard" />
+  </div>
+
+  <div class="resource">
+    <div class="info">
+      <h2>Keyword matrix</h2>
+      <p>Chapter 8 worksheet &mdash; match your resume against a job description.</p>
+      <a class="download" href="files/keyword-matrix.pdf">Download PDF</a>
+    </div>
+    <img class="qr" src="qr/keyword-matrix.png" alt="QR code for the keyword matrix" />
+  </div>
+
+  <div class="resource">
+    <div class="info">
+      <h2>Toolkit A: age-signal resume audit checklist</h2>
+      <p>Ten checks to find where your resume signals age instead of value.</p>
+      <a class="download" href="files/toolkit-a-resume-audit-checklist.pdf">Download PDF</a>
+    </div>
+    <img class="qr" src="qr/toolkit-a.png" alt="QR code for Toolkit A" />
+  </div>
+
+  <div class="resource">
+    <div class="info">
+      <h2>Toolkit B: LinkedIn 30-minute fix checklist</h2>
+      <p>Six fixes, thirty minutes.</p>
+      <a class="download" href="files/toolkit-b-linkedin-fix-checklist.pdf">Download PDF</a>
+    </div>
+    <img class="qr" src="qr/toolkit-b.png" alt="QR code for Toolkit B" />
+  </div>
+
+  <div class="resource">
+    <div class="info">
+      <h2>Weekly job search tracker</h2>
+      <p>Toolkit F &mdash; the HTML tracker, plus an editable spreadsheet version.</p>
+      <a class="download" href="files/weekly-tracker.html">Open tracker</a>
+      &nbsp;
+      <a class="download" href="files/weekly-tracker.xlsx">Download .xlsx</a>
+    </div>
+    <img class="qr" src="qr/tracker.png" alt="QR code for the weekly tracker" />
+  </div>
+
+  <footer>
+    From Written Off, Not Done: A Second-Act Field Guide and Toolkit for Job Seekers Over 50 &mdash; Ali Levent Kilic
+  </footer>
+</div>
+</body>
+</html>
