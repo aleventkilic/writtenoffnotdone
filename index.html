@@ -286,11 +286,15 @@
     <div class="capture">
       <p class="kicker">Read it first</p>
       <h2 class="h2">Get the introduction and a sample chapter — free.</h2>
-      <p class="lede" style="margin-left:auto;margin-right:auto;">Read &ldquo;The Zoom call that explains everything&rdquo; and the opening of Part 1 before you spend a cent. We'll email you the PDF right away.</p>
+      <p class="lede" style="margin-left:auto;margin-right:auto;">Read &ldquo;The Zoom call that explains everything&rdquo; and the opening of Part 1 before you spend a cent. Get the PDF instantly, no waiting on email.</p>
 
-      <div id="doneBox" class="done-box" style="display:none;">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--ember)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        <span>Check your inbox — the sample's on its way.</span>
+      <div id="doneBox" class="done-box" style="display:none; flex-direction:column; align-items:center; gap:14px; text-align:center; max-width:460px; padding:26px;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--ember)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span>Your sample is ready.</span>
+        </div>
+        <a class="btn btn-ember" href="https://writtenoffnotdone.store/files/sample-chapter.pdf" target="_blank" rel="noopener noreferrer" style="font-weight:700;">⬇ Download your sample chapter</a>
+        <p class="fine" style="margin:0;">You're on the list. If you checked the beta-reader box, watch for a follow-up email from me directly.</p>
       </div>
 
       <form id="captureForm" class="capture-form" action="https://formsubmit.co/levent.kilic.contact@gmail.com" method="POST">
@@ -298,7 +302,6 @@
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_next" value="https://writtenoffnotdone.store/?sent=1#sample" />
-        <input type="hidden" name="_autoresponse" value="Thanks for your interest in Written Off, Not Done! Here's your free sample, the introduction and the opening of Part 1: https://writtenoffnotdone.store/files/sample-chapter.pdf&#10;&#10;Want the full book? It's on Amazon Kindle for $9.99: https://www.amazon.com/s?k=Written+Off+Not+Done+Ali+Levent+Kilic&#10;&#10;— Ali Levent Kilic" />
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
         <input id="fname" type="text" name="name" placeholder="Your name" maxlength="100" required />
         <input id="femail" type="email" name="email" placeholder="you@example.com" maxlength="255" required />
