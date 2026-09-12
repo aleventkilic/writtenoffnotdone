@@ -286,11 +286,11 @@
     <div class="capture">
       <p class="kicker">Read it first</p>
       <h2 class="h2">Get the introduction and a sample chapter — free.</h2>
-      <p class="lede" style="margin-left:auto;margin-right:auto;">Read &ldquo;The Zoom call that explains everything&rdquo; and the opening of Part 1 before you spend a cent. Join the beta reader list for launch updates too.</p>
+      <p class="lede" style="margin-left:auto;margin-right:auto;">Read &ldquo;The Zoom call that explains everything&rdquo; and the opening of Part 1 before you spend a cent. We'll email you the PDF right away.</p>
 
       <div id="doneBox" class="done-box" style="display:none;">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--ember)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        <span>You're on the list — watch your inbox.</span>
+        <span>Check your inbox — the sample's on its way.</span>
       </div>
 
       <form id="captureForm" class="capture-form" action="https://formsubmit.co/levent.kilic.contact@gmail.com" method="POST">
@@ -298,11 +298,16 @@
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_next" value="https://writtenoffnotdone.store/?sent=1#sample" />
+        <input type="hidden" name="_autoresponse" value="Thanks for your interest in Written Off, Not Done! Here's your free sample, the introduction and the opening of Part 1: https://writtenoffnotdone.store/files/sample-chapter.pdf&#10;&#10;Want the full book? It's on Amazon Kindle for $9.99: https://www.amazon.com/s?k=Written+Off+Not+Done+Ali+Levent+Kilic&#10;&#10;Already own it? Grab the free worksheets and checklists at https://writtenoffnotdone.store/toolkits.html&#10;&#10;— Ali Levent Kilic" />
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
         <input id="fname" type="text" name="name" placeholder="Your name" maxlength="100" required />
         <input id="femail" type="email" name="email" placeholder="you@example.com" maxlength="255" required />
+        <label style="display:flex;align-items:flex-start;gap:10px;font-size:.88rem;color:var(--muted-foreground);cursor:pointer;">
+          <input type="checkbox" name="Wants to beta-read the full book" value="Yes — send the full draft for feedback" style="width:auto;margin-top:3px;flex:none;" />
+          <span>I'd also like to read the full book before launch and send feedback (beta reader)</span>
+        </label>
         <button type="submit">✉ Send me the sample</button>
-        <p class="fine">No spam. Launch news and the sample chapter, nothing else.</p>
+        <p class="fine">No spam. Just the sample chapter and, if you check the box, an invite to beta-read.</p>
       </form>
     </div>
   </div>
