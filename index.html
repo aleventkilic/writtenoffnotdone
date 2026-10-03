@@ -316,6 +316,33 @@
   </div>
 </section>
 
+<section id="contact">
+  <div class="wrap section-pad">
+    <div class="capture">
+      <p class="kicker">Contact</p>
+      <h2 class="h2">Questions, feedback, or permission to share a toolkit?</h2>
+      <p class="lede" style="margin-left:auto;margin-right:auto;">Send me a note and I'll reply by email. To share, adapt, or use the toolkits with others, tell me who you are and how you plan to use them.</p>
+
+      <div id="contactDone" class="done-box" style="display:none;">
+        <span>Message sent. Thank you, I'll reply by email.</span>
+      </div>
+
+      <form id="contactForm" class="capture-form" action="https://formsubmit.co/levent.kilic.contact@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="Website contact: Written Off, Not Done" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value="https://writtenoffnotdone.store/?contact=1#contact" />
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+        <input id="cname" type="text" name="name" placeholder="Your name" maxlength="100" required />
+        <input id="cemail" type="email" name="email" placeholder="you@example.com" maxlength="255" required />
+        <textarea id="cmessage" name="message" placeholder="Your message" maxlength="3000" rows="6" required style="width:100%;border-radius:12px;border:1px solid var(--input);background:var(--card);padding:13px 16px;font:inherit;outline:none;resize:vertical;"></textarea>
+        <button type="submit">✉ Send message</button>
+        <p class="fine">I read every message. Your details are used only to reply.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
 <section class="dark">
   <div class="wrap final-cta">
     <h2 class="big">They wrote you off. <span class="ember">Show them the math.</span></h2>
@@ -326,6 +353,7 @@
 
 <footer class="site-footer">
   <p>© 2026 Ali Levent Kilic. All rights reserved.</p>
+  <p><a href="#contact">Contact the author</a></p>
   <p>Written Off, Not Done — A Second-Act Field Guide and Toolkit for Job Seekers Over 50.</p>
 </footer>
 
@@ -375,7 +403,7 @@
     "Age-Signal Resume Audit Checklist","LinkedIn 30-Minute Fix Checklist","Warm Outreach Script Templates",
     "Interview Answer Bank: The 8 Unspoken Age Questions","Cover Letter Template: Tenure-as-Asset Framing",
     "Weekly Job Search Tracker","Recruiter-Scam Red Flags &amp; Posting Verification","Diagnose Your Job Search Decision Tree",
-    "LinkedIn Headline Generator","Mock-Interview Scorecard","Consulting, Contract Work &amp; Phased Retirement for 60+",
+    "LinkedIn Headline Generator","Mock-Interview Scorecard","Consulting, Contract Work &amp; Phased Retirement",
     "AI Prompts for the 50+ Job Search","LOI &amp; LOC Red-Flag Checklist Before You Sign"
   ];
   const tkGrid = document.getElementById('toolkits');
@@ -399,6 +427,15 @@
     const url = new URL(window.location.href);
     url.searchParams.delete('sent');
     window.history.replaceState({}, '', url.pathname + url.hash);
+  }
+
+  // Contact form: FormSubmit redirects back with ?contact=1 after a successful send.
+  if (new URLSearchParams(window.location.search).get('contact') === '1') {
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('contactDone').style.display = 'flex';
+    const url2 = new URL(window.location.href);
+    url2.searchParams.delete('contact');
+    window.history.replaceState({}, '', url2.pathname + url2.hash);
   }
 </script>
 </body>
