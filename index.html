@@ -216,7 +216,7 @@
       <p class="hero-sub">Age bias is real. So is a bad resume, a shrinking industry, and an interview you didn't prepare for. This book helps you tell the difference — then do something about whichever one you've actually got.</p>
       <div class="hero-ctas">
         <span class="btn btn-ember btn-lg" style="cursor:default;" aria-disabled="true">Coming soon to Amazon</span>
-        <a class="btn btn-outline-dark btn-lg" href="#sample">✉ Get a free sample chapter</a>
+        <a class="btn btn-outline-dark btn-lg" href="#sample">⬇ Get a free sample chapter</a>
       </div>
       <p class="hero-note">15 chapters · 13 ready-to-use toolkits · every statistic named, dated, and sourced</p>
     </div>
@@ -288,26 +288,10 @@
       <h2 class="h2">Get the introduction and a sample chapter — free.</h2>
       <p class="lede" style="margin-left:auto;margin-right:auto;">Read &ldquo;The video call that explains everything&rdquo; and the opening of Part 1 before you spend a cent. Get the PDF instantly, no waiting on email.</p>
 
-      <div id="doneBox" class="done-box" style="display:none; flex-direction:column; align-items:center; gap:14px; text-align:center; max-width:460px; padding:26px;">
-        <div style="display:flex; align-items:center; gap:10px;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--ember)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          <span>Your sample is ready.</span>
-        </div>
+      <div class="done-box" style="display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center; max-width:460px; padding:26px;">
         <a class="btn btn-ember" href="https://writtenoffnotdone.store/files/sample-chapter.pdf" target="_blank" rel="noopener noreferrer" style="font-weight:700;">⬇ Download your sample chapter</a>
-        <p class="fine" style="margin:0;">You're on the list.</p>
+        <p class="fine" style="margin:0;">No spam. Just the sample chapter.</p>
       </div>
-
-      <form id="captureForm" class="capture-form" action="https://formsubmit.co/levent.kilic.contact@gmail.com" method="POST">
-        <input type="hidden" name="_subject" value="Sample chapter request — Written Off, Not Done" />
-        <input type="hidden" name="_template" value="table" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_next" value="https://writtenoffnotdone.store/?sent=1#sample" />
-        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
-        <input id="fname" type="text" name="name" placeholder="Your name" maxlength="100" required />
-        <input id="femail" type="email" name="email" placeholder="you@example.com" maxlength="255" required />
-        <button type="submit">✉ Send me the sample</button>
-        <p class="fine">No spam. Just the sample chapter.</p>
-      </form>
     </div>
   </div>
 </section>
@@ -415,15 +399,6 @@
     tkGrid.appendChild(card);
   });
 
-  // Form posts for real to FormSubmit, which emails the request to Levent.
-  // FormSubmit redirects back here with ?sent=1 once the submission goes through.
-  if (new URLSearchParams(window.location.search).get('sent') === '1') {
-    document.getElementById('captureForm').style.display = 'none';
-    document.getElementById('doneBox').style.display = 'flex';
-    const url = new URL(window.location.href);
-    url.searchParams.delete('sent');
-    window.history.replaceState({}, '', url.pathname + url.hash);
-  }
 
   // Contact form: FormSubmit redirects back with ?contact=1 after a successful send.
   if (new URLSearchParams(window.location.search).get('contact') === '1') {
